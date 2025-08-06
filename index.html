@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-BIKE-MD - Premium Electric Bicycles in Moldova. German engineering, sustainable design, 30-year warranty.">
+    <title>E-BIKE-MD - Premium Electric Bicycles</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/icons/logo.svg" type="image/svg+xml">
+
+    <!-- External Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/hero.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+<!-- Navigation Header -->
+<header id="main-header"></header>
+
+<!-- E-Bikes Dropdown Menu -->
+<div class="bikes-dropdown" id="bikes-dropdown">
+    <div class="bikes-grid">
+        <div class="bike-card" data-bike="classic">
+            <img src="images/bikes/classic-1.png" alt="Classic Cruiser" class="bike-image">
+            <h3>RECO Classic</h3>
+            <div class="bike-price">€2,299</div>
+        </div>
+        <div class="bike-card" data-bike="trekking">
+            <img src="images/bikes/classic-1.png" alt="Trekking Alpha" class="bike-image">
+            <h3>Alpha Trekking</h3>
+            <div class="bike-price">€2,599</div>
+        </div>
+        <div class="bike-card" data-bike="mountain">
+            <img src="./images/bikes/mountain-1.jpg" alt="Mountain Delta" class="bike-image">
+            <h3>Delta Mountain</h3>
+            <div class="bike-price">€2,799</div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="./bikes.html" class="btn btn-primary btn-lg">Explore all bikes →</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main>
+    <!-- Hero Section with Three Bikes -->
+    <section id="home" class="hero-section">
+        <!-- Bike 1: Classic Cruiser -->
+        <div class="hero-card" data-aos="fade-up" data-bike-color="cream">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <div class="hero-subtitle">Classic Cruiser</div>
+                            <h1 class="hero-title">The Original</h1>
+                            <div class="hero-actions">
+                                <a href="./bike-classic.html" class="btn btn-dark btn-lg explore-btn">Explore</a>
+                                <div class="price">€2,299</div>
+                                <a href="#" class="test-ride-btn" data-action="book-test-ride">Book a test ride</a>
+                            </div>
+                            <p class="hero-description">
+                                Perfect for city commuting and leisurely rides. German engineering meets sustainable design in our flagship model.
+                            </p>
+                            <div class="hero-tags">
+                                <span class="tag">City Comfort</span>
+                                <span class="tag">100% Recyclable</span>
+                                <span class="tag">30yr Warranty</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="./images/bikes/classic-1.png" alt="Classic Cruiser E-Bike" class="hero-image" data-aos="fade-left">
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-circle">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 15l-5-5h10l-5 5z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bike 2: Trekking Alpha -->
+        <div class="hero-card" data-aos="fade-up" data-bike-color="brown">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="hero-content">
+                            <div class="hero-subtitle">Trekking Alpha</div>
+                            <h1 class="hero-title">The Explorer</h1>
+                            <div class="hero-actions">
+                                <a href="./bike-trekking.html" class="btn btn-dark btn-lg explore-btn">Explore</a>
+                                <div class="price">€2,599</div>
+                                <a href="#" class="test-ride-btn" data-action="book-test-ride">Book a test ride</a>
+                            </div>
+                            <p class="hero-description">
+                                Built for adventure. From city streets to mountain trails, this versatile e-bike handles all terrains with confidence.
+                            </p>
+                            <div class="hero-tags">
+                                <span class="tag">All-Terrain</span>
+                                <span class="tag">61-Mile Range</span>
+                                <span class="tag">24-Speed Gears</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <img src="./images/bikes/trekking-1.jpg" alt="Trekking Alpha E-Bike" class="hero-image" data-aos="fade-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bike 3: Mountain Delta -->
+        <div class="hero-card" data-aos="fade-up" data-bike-color="red">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <div class="hero-subtitle">Mountain Delta</div>
+                            <h1 class="hero-title">The Beast</h1>
+                            <div class="hero-actions">
+                                <a href="./bike-mountain.html" class="btn btn-dark btn-lg explore-btn">Explore</a>
+                                <div class="price">€2,799</div>
+                                <a href="#" class="test-ride-btn" data-action="book-test-ride">Book a test ride</a>
+                            </div>
+                            <p class="hero-description">
+                                Conquer any mountain with power and precision. Lightweight frame, hydraulic brakes, and unmatched performance.
+                            </p>
+                            <div class="hero-tags">
+                                <span class="tag">Mountain Ready</span>
+                                <span class="tag">62 Mile Range</span>
+                                <span class="tag">Hydraulic Disc</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="./images/bikes/mountain-1.jpg" alt="Mountain Delta E-Bike" class="hero-image hero-image-flipped" data-aos="fade-left">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Made For You Section -->
+    <section class="made-for-you" data-aos="zoom-in">
+        <div class="made-content">
+            <h2 class="made-title">Made Just For You</h2>
+            <p class="made-subtitle">
+                We have a bike for all your preferences, all your life activities. Whether you're commuting, exploring, or seeking adventure.
+            </p>
+            <a href="./types.html" class="btn btn-light btn-lg">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us" data-aos="fade-up">
+        <div class="container">
+            <div class="why-us-header text-center mb-5">
+                <h2 class="why-us-title">Why Choose Us</h2>
+                <p class="lead">We got you covered</p>
+            </div>
+
+            <div class="carousel-container">
+                <button class="carousel-nav prev" id="carousel-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="carousel-nav next" id="carousel-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+
+                <div class="carousel-wrapper" id="why-carousel">
+                    <!-- Carousel items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" data-aos="fade-up">
+        <div class="contact-content text-center">
+            <h2 class="contact-title">Ready to Ride?</h2>
+            <p class="contact-subtitle">
+                Not sure which bike is right for you? Let's have a conversation about your needs.
+            </p>
+            <button class="btn btn-light btn-lg" id="contact-btn">Let's Call</button>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer id="main-footer"></footer>
+
+<!-- Contact Modal -->
+<div class="modal" id="contact-modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <h3>Get in Touch</h3>
+        <p>Choose your preferred way to contact us:</p>
+        <div class="contact-methods" id="contact-methods">
+            <!-- Contact methods will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="./js/utils.js"></script>
+<script src="./js/bike-data.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/carousel.js"></script>
+<script src="./js/modal.js"></script>
+<script src="./js/animations.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>
