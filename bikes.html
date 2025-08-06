@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all E-BIKE-MD electric bicycles. Classic, Trekking, and Mountain e-bikes with German engineering and sustainable design.">
+    <title>All E-Bikes - E-BIKE-MD | Premium Electric Bicycles</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/icons/logo.svg" type="image/svg+xml">
+
+    <!-- External Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+
+    <style>
+        /* Page-specific styles */
+        .page-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: calc(var(--navbar-height) + var(--spacing-4xl)) 0 var(--spacing-4xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-xl);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bikes-section {
+            padding: var(--spacing-5xl) 0;
+            background: var(--color-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-4xl);
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .bikes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-4xl);
+        }
+
+        .bike-card {
+            background: var(--color-white);
+            border-radius: var(--card-border-radius);
+            padding: var(--spacing-2xl);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-all);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bike-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .bike-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,123,255,0.05), transparent);
+            transition: left var(--transition-slow);
+        }
+
+        .bike-card:hover::before {
+            left: 100%;
+        }
+
+        .bike-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-lg);
+            transition: var(--transition-all);
+        }
+
+        .bike-card:hover .bike-image {
+            transform: scale(1.05);
+        }
+
+        .bike-category {
+            display: inline-block;
+            background: rgba(0,123,255,0.1);
+            color: var(--color-primary);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--border-radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bike-name {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-dark);
+        }
+
+        .bike-nickname {
+            font-size: var(--font-size-lg);
+            color: var(--color-secondary);
+            margin-bottom: var(--spacing-md);
+            font-style: italic;
+        }
+
+        .bike-price {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .bike-description {
+            color: var(--color-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .bike-features {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-tag {
+            background: var(--color-light);
+            color: var(--color-secondary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-sm);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .bike-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .view-details-btn {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--button-border-radius);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-all);
+            flex: 1;
+            text-align: center;
+        }
+
+        .view-details-btn:hover {
+            background: var(--color-primary-dark);
+            color: var(--color-white);
+            transform: translateY(-2px);
+        }
+
+        .test-ride-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-sm);
+            position: relative;
+        }
+
+        .test-ride-link:hover {
+            color: var(--color-primary-dark);
+        }
+
+        .test-ride-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width var(--transition-normal);
+        }
+
+        .test-ride-link:hover::after {
+            width: 100%;
+        }
+
+        .comparison-section {
+            background: var(--color-white);
+            padding: var(--spacing-5xl) 0;
+        }
+
+        .comparison-table {
+            background: var(--color-white);
+            border-radius: var(--card-border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--spacing-lg);
+            text-align: left;
+            border-bottom: 1px solid var(--color-light);
+        }
+
+        .comparison-table th {
+            background: var(--color-primary);
+            color: var(--color-white);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(0,123,255,0.05);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+            color: var(--color-white);
+            padding: var(--spacing-5xl) 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cta-subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: var(--color-white);
+            color: var(--color-dark);
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            border-radius: var(--button-border-radius);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-all);
+        }
+
+        .cta-button:hover {
+            background: var(--color-light);
+            color: var(--color-dark);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--color-white);
+            color: var(--color-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .bikes-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .bike-card {
+                padding: var(--spacing-lg);
+            }
+
+            .bike-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .comparison-table {
+                font-size: var(--font-size-sm);
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Skip Link for Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation Header -->
+<header id="main-header"></header>
+
+<!-- E-Bikes Dropdown Menu -->
+<div class="bikes-dropdown" id="bikes-dropdown">
+    <div class="bikes-grid">
+        <div class="bike-card" data-bike="classic">
+            <img src="./images/bikes/classic-1.png" alt="Classic Cruiser" class="bike-image">
+            <h3>RECO Classic</h3>
+            <div class="bike-price">€2,299</div>
+        </div>
+        <div class="bike-card" data-bike="trekking">
+            <img src="./images/bikes/trekking-1.jpg" alt="Trekking Alpha" class="bike-image">
+            <h3>Alpha Trekking</h3>
+            <div class="bike-price">€2,599</div>
+        </div>
+        <div class="bike-card" data-bike="mountain">
+            <img src="./images/bikes/mountain-1.jpg" alt="Mountain Delta" class="bike-image">
+            <h3>Delta Mountain</h3>
+            <div class="bike-price">€2,799</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up">
+                <h1 class="page-title">Our E-Bike Collection</h1>
+                <p class="page-subtitle">
+                    Discover the perfect electric bike for your lifestyle. German engineering meets sustainable design in every model.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bikes Grid Section -->
+    <section class="bikes-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Choose Your Perfect E-Bike</h2>
+                <p class="lead">Each bike is crafted with precision and designed for different adventures</p>
+            </div>
+
+            <div class="bikes-grid" id="bikes-grid">
+                <!-- Bikes will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Quick Comparison</h2>
+                <p class="lead">Compare key specifications across all models</p>
+            </div>
+
+            <div class="comparison-table" data-aos="fade-up">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Classic Cruiser</th>
+                        <th>Trekking Alpha</th>
+                        <th>Mountain Delta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>Price</strong></td>
+                        <td>€2,299</td>
+                        <td>€2,599</td>
+                        <td>€2,799</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Range</strong></td>
+                        <td>Up to 80km</td>
+                        <td>Up to 98km</td>
+                        <td>Up to 100km</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motor</strong></td>
+                        <td>Bosch 250W</td>
+                        <td>Promovec 250W</td>
+                        <td>Promovec 250W</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gears</strong></td>
+                        <td>8-speed</td>
+                        <td>24-speed</td>
+                        <td>27-speed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weight</strong></td>
+                        <td>22kg</td>
+                        <td>22.7kg</td>
+                        <td>20.5kg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>City commuting</td>
+                        <td>Long tours</td>
+                        <td>Mountain trails</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2 class="cta-title">Ready to Start Your E-Bike Journey?</h2>
+                <p class="cta-subtitle">
+                    Experience the future of transportation with German engineering and sustainable design
+                </p>
+                <div class="cta-buttons">
+                    <button class="cta-button" id="book-test-ride">Book a Test Ride</button>
+                    <button class="cta-button secondary" id="get-consultation">Get Consultation</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer id="main-footer"></footer>
+
+<!-- Contact Modal -->
+<div class="modal" id="contact-modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <h3>Get in Touch</h3>
+        <p>Choose your preferred way to contact us:</p>
+        <div class="contact-methods" id="contact-methods">
+            <!-- Contact methods will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="./js/utils.js"></script>
+<script src="./js/bike-data.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/modal.js"></script>
+<script src="./js/main.js"></script>
+
+<script>
+    // Page-specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Populate bikes grid
+        const bikesGrid = document.getElementById('bikes-grid');
+        if (bikesGrid && window.BIKE_DATA) {
+            bikesGrid.innerHTML = Object.values(window.BIKE_DATA).map(bike => `
+                    <a href="./bike-${bike.id}.html" class="bike-card" data-aos="fade-up">
+                        <img src="${bike.images.main}" alt="${bike.name}" class="bike-image">
+                        <div class="bike-category">${bike.category}</div>
+                        <h3 class="bike-name">${bike.name}</h3>
+                        <p class="bike-nickname">${bike.nickname}</p>
+                        <div class="bike-price">${bike.currency}${bike.price.toLocaleString()}</div>
+                        <p class="bike-description">${bike.shortDescription || bike.description}</p>
+                        <div class="bike-features">
+                            ${bike.tags.slice(0, 3).map(tag => `<span class="feature-tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="bike-actions">
+                            <span class="view-details-btn">View Details</span>
+                            <a href="#" class="test-ride-link" onclick="event.preventDefault(); event.stopPropagation(); window.modalManager?.openContactModal();">Book Test Ride</a>
+                        </div>
+                    </a>
+                `).join('');
+        }
+
+        // Bind test ride buttons
+        document.getElementById('book-test-ride')?.addEventListener('click', () => {
+            window.modalManager?.openContactModal();
+        });
+
+        document.getElementById('get-consultation')?.addEventListener('click', () => {
+            window.modalManager?.openContactModal();
+        });
+    });
+</script>
+</body>
+</html>

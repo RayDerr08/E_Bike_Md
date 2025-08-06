@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Delta Mountain - The Beast e-bike. High-performance mountain biking, 100km range, 27-speed gears, hydraulic suspension. Built for extreme terrain.">
+    <title>Delta Mountain - The Beast | E-BIKE-MD</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/icons/logo.svg" type="image/svg+xml">
+
+    <!-- External Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+
+    <style>
+        /* Mountain Bike Page Styles */
+        .bike-hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-red-light) 0%, rgba(0, 0, 0, 0.3) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: var(--navbar-height);
+        }
+
+        .bike-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                    radial-gradient(circle at 30% 20%, rgba(220, 20, 60, 0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
+        }
+
+        .bike-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bike-hero-subtitle {
+            font-size: var(--font-size-base);
+            color: var(--color-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-weight: var(--font-weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bike-hero-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: var(--font-weight-bold);
+            line-height: 1.1;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--color-red) 0%, var(--color-dark) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bike-hero-price {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-red);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .bike-hero-image {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(var(--shadow-2xl));
+            transition: var(--transition-all);
+            transform: scaleX(-1); /* Flipped for mountain bike */
+        }
+
+        .bike-hero-image:hover {
+            transform: scaleX(-1) scale(1.05);
+        }
+
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: var(--spacing-xl);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--color-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .bike-overview {
+            background: var(--color-white);
+            padding: var(--spacing-5xl) 0;
+        }
+
+        .color-selector {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-all);
+            position: relative;
+        }
+
+        .color-option.active {
+            border-color: var(--color-red);
+            transform: scale(1.1);
+        }
+
+        .color-option.matte-black { background: #2c2c2c; }
+        .color-option.racing-red { background: var(--color-red); }
+        .color-option.electric-blue { background: #0080FF; }
+
+        .bike-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-4xl);
+        }
+
+        .highlight-card {
+            background: var(--color-light);
+            padding: var(--spacing-xl);
+            border-radius: var(--card-border-radius);
+            text-align: center;
+            transition: var(--transition-all);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(220, 20, 60, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: transform var(--transition-slow);
+            opacity: 0;
+        }
+
+        .highlight-card:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+            opacity: 1;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border: 2px solid var(--color-red);
+        }
+
+        .highlight-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-red), #B22222);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: var(--font-size-xl);
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .performance-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: var(--spacing-5xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .performance-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                    radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.2) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(220, 20, 60, 0.1) 0%, transparent 50%);
+        }
+
+        .performance-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .performance-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .performance-stat {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--card-border-radius);
+            backdrop-filter: var(--backdrop-blur-sm);
+            border: 1px solid rgba(220, 20, 60, 0.3);
+            transition: var(--transition-all);
+        }
+
+        .performance-stat:hover {
+            border-color: var(--color-red);
+            transform: translateY(-5px);
+            background: rgba(220, 20, 60, 0.1);
+        }
+
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-red);
+            display: block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: var(--font-size-lg);
+        }
+
+        .specifications-section {
+            background: var(--color-light);
+            padding: var(--spacing-5xl) 0;
+        }
+
+        .spec-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .spec-card {
+            background: var(--color-white);
+            padding: var(--spacing-2xl);
+            border-radius: var(--card-border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-all);
+            border-left: 4px solid transparent;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-left-color: var(--color-red);
+        }
+
+        .spec-card h3 {
+            color: var(--color-red);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: var(--font-size-xl);
+        }
+
+        .spec-card h3::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: var(--color-red);
+            border-radius: 2px;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .spec-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--color-light);
+        }
+
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-dark);
+        }
+
+        .spec-value {
+            color: var(--color-secondary);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .spec-highlight {
+            color: var(--color-red) !important;
+            font-weight: var(--font-weight-bold) !important;
+        }
+
+        .terrain-section {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: var(--spacing-5xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terrain-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 30%, rgba(220, 20, 60, 0.2) 0%, transparent 50%);
+        }
+
+        .terrain-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .terrain-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .terrain-feature {
+            background: rgba(255,255,255,0.1);
+            padding: var(--spacing-2xl);
+            border-radius: var(--card-border-radius);
+            backdrop-filter: var(--backdrop-blur-sm);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition-all);
+        }
+
+        .terrain-feature:hover {
+            background: rgba(220, 20, 60, 0.2);
+            border-color: rgba(220, 20, 60, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .terrain-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(220, 20, 60, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-xl);
+        }
+
+        .terrain-feature h4 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-red);
+        }
+
+        .contact-cta {
+            background: var(--color-dark);
+            color: white;
+            padding: var(--spacing-5xl) 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(220, 20, 60, 0.3) 0%, transparent 50%);
+        }
+
+        .contact-cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-cta-title {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .contact-cta-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: var(--color-red);
+            color: white;
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            border-radius: var(--button-border-radius);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+            transition: var(--transition-all);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #B22222;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: var(--color-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .bike-hero {
+                text-align: center;
+                padding: var(--navbar-height) 0 var(--spacing-4xl);
+            }
+
+            .bike-hero .row {
+                flex-direction: column;
+            }
+
+            .bike-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .performance-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .terrain-features {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .performance-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Special mountain bike effects */
+        .mountain-glow {
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
+        @keyframes mountainPulse {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(220, 20, 60, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+            }
+        }
+
+        .pulse-red {
+            animation: mountainPulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+<!-- Skip Link for Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation Header -->
+<header id="main-header"></header>
+
+<!-- E-Bikes Dropdown Menu -->
+<div class="bikes-dropdown" id="bikes-dropdown">
+    <div class="bikes-grid">
+        <div class="bike-card" data-bike="classic">
+            <img src="./images/bikes/classic-1.png" alt="Classic Cruiser" class="bike-image">
+            <h3>RECO Classic</h3>
+            <div class="bike-price">€2,299</div>
+        </div>
+        <div class="bike-card" data-bike="trekking">
+            <img src="./images/bikes/trekking-1.jpg" alt="Trekking Alpha" class="bike-image">
+            <h3>Alpha Trekking</h3>
+            <div class="bike-price">€2,599</div>
+        </div>
+        <div class="bike-card" data-bike="mountain">
+            <img src="./images/bikes/mountain-1.jpg" alt="Mountain Delta" class="bike-image">
+            <h3>Delta Mountain</h3>
+            <div class="bike-price">€2,799</div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="./bikes.html" class="btn btn-primary btn-lg">Explore all bikes →</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+    <!-- Bike Hero Section -->
+    <section class="bike-hero">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="bike-hero-content" data-aos="fade-up">
+                        <div class="bike-hero-subtitle">Delta Mountain</div>
+                        <h1 class="bike-hero-title">The Beast</h1>
+                        <div class="bike-hero-price">€2,799</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="./images/bikes/mountain-1.jpg" alt="Delta Mountain E-Bike" class="bike-hero-image" data-aos="fade-left">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down-indicator" onclick="document.querySelector('.bike-overview').scrollIntoView({behavior: 'smooth'})">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 15l-5-5h10l-5 5z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Bike Overview Section -->
+    <section class="bike-overview">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up">
+                        <h2 class="section-title">Conquer Any Mountain</h2>
+                        <p class="lead">Built for serious riders who demand peak performance on challenging terrain. The Delta Mountain combines lightweight design with powerful components, hydraulic brakes, and unmatched durability for the ultimate mountain biking experience.</p>
+                    </div>
+
+                    <div class="color-selector" data-aos="fade-up">
+                        <h4>Choose Your Color:</h4>
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="color-option matte-black" data-color="matte-black" title="Matte Black"></div>
+                            <div class="color-option racing-red active" data-color="racing-red" title="Racing Red"></div>
+                            <div class="color-option electric-blue" data-color="electric-blue" title="Electric Blue"></div>
+                            <small class="text-muted ms-3">Bold colors for bold riders</small>
+                        </div>
+                    </div>
+
+                    <div class="bike-highlights" data-aos="fade-up">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🏔️</div>
+                            <h4>Mountain Domination</h4>
+                            <p>Engineered specifically for steep climbs and technical descents</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">⚡</div>
+                            <h4>Lightweight Power</h4>
+                            <p>Only 20.5kg with 250W motor delivering maximum torque</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🔧</div>
+                            <h4>27-Speed Precision</h4>
+                            <p>Shimano Acera 9x3 system for any gradient or terrain</p>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🛡️</div>
+                            <h4>Hydraulic Control</h4>
+                            <p>Suntour suspension with lockout and Shimano disc brakes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img src="./images/bikes/trekking-2.png" alt="Delta Mountain Details" class="img-fluid rounded mountain-glow" data-aos="fade-left">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Stats Section -->
+    <section class="performance-section">
+        <div class="container">
+            <div class="performance-content text-center" data-aos="zoom-in">
+                <h2 class="display-4 mb-4">Built for Performance</h2>
+                <p class="lead mb-4">
+                    Every component selected for maximum performance, reliability, and rider confidence on the most challenging terrain.
+                </p>
+
+                <div class="performance-stats">
+                    <div class="performance-stat pulse-red" data-aos="fade-up" data-aos-delay="100">
+                        <span class="stat-number">20.5kg</span>
+                        <span class="stat-label">Lightweight Frame</span>
+                    </div>
+                    <div class="performance-stat" data-aos="fade-up" data-aos-delay="200">
+                        <span class="stat-number">100km</span>
+                        <span class="stat-label">Maximum Range</span>
+                    </div>
+                    <div class="performance-stat" data-aos="fade-up" data-aos-delay="300">
+                        <span class="stat-number">29"</span>
+                        <span class="stat-label">Wheel Size</span>
+                    </div>
+                    <div class="performance-stat" data-aos="fade-up" data-aos-delay="400">
+                        <span class="stat-number">100mm</span>
+                        <span class="stat-label">Suspension Travel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="specifications-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Advanced Specifications</h2>
+                <p class="lead">Premium components designed for extreme performance and reliability</p>
+            </div>
+
+            <div class="spec-cards">
+                <div class="spec-card" data-aos="fade-up">
+                    <h3>Frame & Geometry</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Lightweight aluminum</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Size</span>
+                            <span class="spec-value">51cm hardtail MTB</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Geometry</span>
+                            <span class="spec-value spec-highlight">Aggressive mountain</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Weight (with battery)</span>
+                            <span class="spec-value spec-highlight">20.5kg</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Max Load</span>
+                            <span class="spec-value">120kg</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Motor & Power</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Motor</span>
+                            <span class="spec-value">Promovec 250W Rear Hub</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Torque</span>
+                            <span class="spec-value spec-highlight">High torque climbing</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Battery</span>
+                            <span class="spec-value">375Wh / 460Wh options</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Range</span>
+                            <span class="spec-value spec-highlight">Up to 100km</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Integration</span>
+                            <span class="spec-value">In-frame design</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Drivetrain System</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Gears</span>
+                            <span class="spec-value spec-highlight">27-speed (9x3)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Brand</span>
+                            <span class="spec-value">Shimano Acera</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Cassette</span>
+                            <span class="spec-value">Wide-range mountain</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Chain Guide</span>
+                            <span class="spec-value">Included for retention</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Brakes & Control</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Brakes</span>
+                            <span class="spec-value spec-highlight">Shimano hydraulic disc</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Rotors</span>
+                            <span class="spec-value">180mm front, 160mm rear</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Performance</span>
+                            <span class="spec-value">All-weather stopping power</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Modulation</span>
+                            <span class="spec-value">Precise control</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Wheels & Suspension</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Wheel Size</span>
+                            <span class="spec-value spec-highlight">28/29 inches</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Tires</span>
+                            <span class="spec-value">Schwalbe Rapid Rob Kevlar</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Tread</span>
+                            <span class="spec-value">Aggressive mountain pattern</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Suspension</span>
+                            <span class="spec-value spec-highlight">Suntour 100mm hydraulic</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Adjustment</span>
+                            <span class="spec-value">Lockout & rebound</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="spec-card" data-aos="fade-up" data-aos-delay="500">
+                    <h3>Tech Features</h3>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Display</span>
+                            <span class="spec-value">Center LCD (5 power levels)</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Lighting</span>
+                            <span class="spec-value">System-powered LED</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Tubeless Ready</span>
+                            <span class="spec-value spec-highlight">Yes</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Quick Release</span>
+                            <span class="spec-value">Wheels</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terrain Section -->
+    <section class="terrain-section">
+        <div class="container">
+            <div class="terrain-content text-center" data-aos="zoom-in">
+                <h2 class="display-4 mb-4">Master Every Terrain</h2>
+                <p class="lead mb-4">
+                    The Delta Mountain is engineered to excel where other bikes fear to tread.
+                    From technical single tracks to steep alpine climbs, this is your ultimate mountain companion.
+                </p>
+
+                <div class="terrain-features">
+                    <div class="terrain-feature" data-aos="fade-up" data-aos-delay="100">
+                        <div class="terrain-icon">⛰️</div>
+                        <h4>Steep Climbs</h4>
+                        <p>High-torque motor and 27-speed gearing conquer the steepest ascents with confidence and control</p>
+                    </div>
+                    <div class="terrain-feature" data-aos="fade-up" data-aos-delay="200">
+                        <div class="terrain-icon">🏔️</div>
+                        <h4>Technical Descents</h4>
+                        <p>Hydraulic suspension and powerful disc brakes provide stability and control on challenging downhills</p>
+                    </div>
+                    <div class="terrain-feature" data-aos="fade-up" data-aos-delay="300">
+                        <div class="terrain-icon">🌲</div>
+                        <h4>Forest Trails</h4>
+                        <p>Aggressive tire tread and nimble handling navigate tight single tracks and root-covered paths</p>
+                    </div>
+                    <div class="terrain-feature" data-aos="fade-up" data-aos-delay="400">
+                        <div class="terrain-icon">🗻</div>
+                        <h4>Rocky Terrain</h4>
+                        <p>Robust construction and advanced suspension absorb impacts while maintaining traction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="contact-cta-content" data-aos="zoom-in">
+                <h2 class="contact-cta-title">Ready to Unleash The Beast?</h2>
+                <p class="lead mb-4">
+                    Join the elite riders who've chosen the Delta Mountain for their most challenging adventures.
+                </p>
+                <div class="contact-cta-buttons">
+                    <button class="cta-button" id="book-test-ride">Book a Test Ride</button>
+                    <button class="cta-button secondary" id="get-consultation">Get Consultation</button>
+                    <a href="./bikes.html" class="cta-button secondary">Compare Models</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer id="main-footer"></footer>
+
+<!-- Contact Modal -->
+<div class="modal" id="contact-modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">×</button>
+        <h3>Get in Touch</h3>
+        <p>Choose your preferred way to contact us:</p>
+        <div class="contact-methods" id="contact-methods">
+            <!-- Contact methods will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="./js/utils.js"></script>
+<script src="./js/bike-data.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/modal.js"></script>
+<script src="./js/main.js"></script>
+
+<script>
+    // Page-specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Color selector functionality
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+
+                const color = this.dataset.color;
+                console.log(`Selected color: ${color}`);
+
+                // Add special effects for mountain bike
+                if (color === 'racing-red') {
+                    document.querySelector('.bike-hero-image').classList.add('pulse-red');
+                } else {
+                    document.querySelector('.bike-hero-image').classList.remove('pulse-red');
+                }
+            });
+        });
+
+        // Bind CTA buttons
+        document.getElementById('book-test-ride')?.addEventListener('click', () => {
+            window.modalManager?.openContactModal();
+        });
+
+        document.getElementById('get-consultation')?.addEventListener('click', () => {
+            window.modalManager?.openContactModal();
+        });
+
+        // Add mountain-specific interactions
+        document.querySelectorAll('.highlight-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--color-red)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'transparent';
+            });
+        });
+    });
+</script>
+</body>
+</html>
